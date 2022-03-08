@@ -6,6 +6,12 @@ const app = express();
 
 app.use("/", todoRoute);
 
+app.use((error, req, res, next) => {
+  res.status(500).json({
+    message: "Something Went Wrong",
+  });
+});
+
 app.listen(3000, () => {
   console.log("Listen on Port 3000");
   db.connectToDatabase().then(() => {
