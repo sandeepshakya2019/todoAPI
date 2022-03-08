@@ -1,8 +1,11 @@
 const express = require("express");
 const todoRoute = require("./routes/todo.routes");
 const db = require("./data/todo.database");
+const enableCor = require("./middleware/cors");
 
 const app = express();
+// To remove the cors error Server A wants to Connect the server B
+app.use(enableCor);
 
 app.use(express.json());
 app.use("/", todoRoute);
