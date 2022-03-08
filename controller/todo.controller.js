@@ -17,26 +17,48 @@ const getAllTodo = async (req, res, next) => {
 
 const saveTodo = async (req, res, next) => {
   const task = req.body.task;
-  console.log(task);
   const newTodo = new Todo(task);
   try {
-    newTodo.save();
+    await newTodo.save();
   } catch (err) {
     return next(err);
   }
   res.json({ msg: "Adding todo Success", createdTod: newTodo });
 };
 
-const getTodo = (req, res, next) => {};
+const updateTodo = async (req, res, next) => {
+  const id = req.params.id;
+  const task = req.body.task;
+  console.log(id, task);
+  const newTodo = new Todo(task, id);
 
-const deleteTodo = (req, res, next) => {};
+  try {
+    await newTodo.save();
+  } catch (err) {
+    return next(err);
+  }
+
+  res.json({ msg: "UPdated todo Success", updatedTod: newTodo });
+};
+
+const deleteTodo = async (req, res, next) => {
+  const id = req.params.id;
+  const newTodo = new Todo(null, id);
+  try {
+    await newTodo.delete();
+  } catch (err) {
+    return next(err);
+  }
+
+  res.json({ msg: "Delete Todo", deletedTodo: newTodo });
+};
 
 // If key value same that do not need to place the equal sign
 
 module.exports = {
   getRoot,
   getAllTodo,
-  getTodo,
+  updateTodo,
   deleteTodo,
   saveTodo,
 };
