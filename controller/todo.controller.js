@@ -9,15 +9,15 @@ const getAllTodo = async (req, res, next) => {
   let todo;
   try {
     todo = await Todo.getAllTodos();
-    console.log(todo);
   } catch (err) {
     return next(err);
   }
-  res.json(todos);
+  res.json(todo);
 };
 
 const saveTodo = async (req, res, next) => {
   const task = req.body.task;
+  console.log(task);
   const newTodo = new Todo(task);
   try {
     newTodo.save();

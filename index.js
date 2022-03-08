@@ -4,6 +4,7 @@ const db = require("./data/todo.database");
 
 const app = express();
 
+app.use(express.json());
 app.use("/", todoRoute);
 
 app.use((error, req, res, next) => {

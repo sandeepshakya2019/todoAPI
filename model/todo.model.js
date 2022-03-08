@@ -10,7 +10,7 @@ class Todo {
     const allTodo = await db.getDb().collection("todos").find().toArray();
 
     return allTodo.map((todo) => {
-      return new Todo(todo._id, todo.task);
+      return new Todo(todo.task, todo._id);
     });
   }
 
@@ -20,12 +20,12 @@ class Todo {
       return await db
         .getDb()
         .collection("todos")
-        .updateOne({ _id: todoId }, { $set: { text: this.text } });
+        .updateOne({ _id: todoId }, { $set: { task: this.task } });
     } else {
       return await db
         .getDb()
         .collection("todos")
-        .insertOne({ text: this.text });
+        .insertOne({ task: this.task });
     }
   }
 
