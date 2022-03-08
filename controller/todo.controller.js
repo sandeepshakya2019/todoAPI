@@ -38,7 +38,7 @@ const updateTodo = async (req, res, next) => {
     return next(err);
   }
 
-  res.json({ msg: "UPdated todo Success", updatedTod: newTodo });
+  res.json({ msg: "UPdated todo Success", updatedTodo: newTodo });
 };
 
 const deleteTodo = async (req, res, next) => {
